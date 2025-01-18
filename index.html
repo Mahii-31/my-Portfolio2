@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mahadevan's portfolio showcasing projects, skills, and contact information.">
+    <meta name="keywords" content="Software Engineer, Portfolio, Web Developer, Projects, Skills">
+    <meta name="author" content="Mahadevan">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>Mahadevan's Portfolio</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                <span>Mahadevan</span>
+            </div>
+            <div class="links">
+                <div class="link"><a href="#home">Home</a></div>
+                <div class="link"><a href="#about">About</a></div>
+                <div class="link"><a href="#skills">Skills</a></div>
+                <div class="link"><a href="#projects">Projects</a></div>
+                <div class="link"><a href="#contact">Contact</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+            <i class="fa-solid fa-moon theme-toggle" onclick="toggleTheme()"></i>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="main-container">
+            <div class="image" data-aos="zoom-out" data-aos-duration="3000">
+                <img src="mahi.jpg" alt="Mahadevan">
+            </div>
+            <div class="content">
+                <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">
+                    Hi, I'm <span>Mahadevan</span>
+                </h1>
+                <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">
+                    Aspiring Software Engineer | Final Year Student
+                </div>
+                <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100">
+                    I am a final-year Computer Science and Engineering student from APJ Abdul Kalam Technological University.
+                </p>
+                <div class="social-links">
+                    <a href="#" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1300"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1400"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1500"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1600"><i class="fa-brands fa-twitter"></i></a>
+                </div>
+                <div class="btn" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="1800">
+                    <button>Contact Me</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About</h2>
+        <p>I am passionate about coding and technology...</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>C++</li>
+            <li>Java</li>
+            <li>MySQL</li>
+            <li>HTML & CSS</li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-card" onclick="showProjectModal('project1')">
+            <h3>Tower Game Using Unity</h3>
+            <p>A tower defense game built using Unity and C# featuring 3D assets.</p>
+        </div>
+        <div class="project-card" onclick="showProjectModal('project2')">
+            <h3>Image Forgery Detection & Face Recognition</h3>
+            <p>Developed a web application utilizing CNN to detect image forgery and perform face recognition.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>
+            <strong>Email:</strong> rmjmahadevan31@gmail.com<br>
+            <strong>Phone:</strong> +91 9778146201<br>
+            <strong>Address:</strong> Thoppil house, Mannar, Kerala
+        </p>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ offset: 0 });
+
+        const links = document.querySelectorAll(".links a");
+
+        window.addEventListener("scroll", () => {
+            const scrollPosition = window.scrollY;
+
+            links.forEach(link => {
+                const section = document.querySelector(link.getAttribute("href"));
+                if (
+                    section.offsetTop <= scrollPosition &&
+                    section.offsetTop + section.offsetHeight > scrollPosition
+                ) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        });
+
+        // Hamburger menu functionality
+        function hamburg() {
+            const navbar = document.querySelector(".nav-container");
+            navbar.classList.toggle("active"); // Toggle visibility of the menu
+        }
+
+        // Theme Toggle (Light/Dark Mode)
+        function toggleTheme() {
+            document.body.classList.toggle("light-theme");
+            const themeIcon = document.querySelector(".theme-toggle");
+            themeIcon.classList.toggle("fa-sun");
+        }
+
+        // Show project modal
+        function showProjectModal(project) {
+            const modal = document.getElementById("projectModal");
+            const title = document.getElementById("modalTitle");
+            const description = document.getElementById("modalDescription");
+
+            if (project === 'project1') {
+                title.textContent = "Tower Game Using Unity";
+                description.textContent = "A tower defense game built using Unity and C# featuring 3D assets.";
+            } else if (project === 'project2') {
+                title.textContent = "Image Forgery Detection & Face Recognition";
+                description.textContent = "Developed a web application utilizing CNN to detect image forgery and perform face recognition.";
+            }
+
+            modal.style.display = "block";
+        }
+
+        // Close the project modal
+        function closeModal() {
+            const modal = document.getElementById("projectModal");
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicked outside the content
+        window.onclick = function(event) {
+            const modal = document.getElementById("projectModal");
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
